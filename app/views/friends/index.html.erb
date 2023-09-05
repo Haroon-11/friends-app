@@ -1,0 +1,40 @@
+<h1>Friend List</h1>
+
+<p class="lead"><strong>Current <%= current_user.role %>: </strong><%= current_user.name %></p>
+
+
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Twitter</th>
+        <th>Freind of</th>
+        <th colspan="3"> </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @friends.each do |friend| %>
+        <tr>
+          <td><%= friend.first_name %></td>
+          <td><%= friend.email %></td>
+          <td><%= friend.phone_number %></td>
+          <td><%= friend.address %></td>
+          <td><%= friend.twitter %></td>
+          <td><%= User.find_by(id: friend.user_id).name %>
+
+          </td>
+          <td><%= link_to "Edit", edit_friend_path(friend) ,class:"btn btn-sm btn-info", style:"color:white; text-decoration:none;"%></td>
+          <td><%= link_to "Show", friend_path(friend) ,class:"btn btn-sm btn-success", style:"color:white; text-decoration:none;"%></td>
+          <td><%= link_to "Delete" , friend, data:{turbo_method: :delete } ,class:"btn btn-sm btn-danger", style:"color:white; text-decoration:none;"%></td>
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+   
+
+<%= link_to "New friend", new_friend_path, class:"btn btn-secondary", style:"color:white; text-decoration:none;" %>

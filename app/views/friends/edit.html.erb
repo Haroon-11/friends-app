@@ -1,0 +1,17 @@
+
+
+<% if current_user.role == "admin" || current_user.id == @friend.user_id %>
+  <h1>Editing friend</h1>
+  <%= render "form", friend: @friend %>
+
+  <br>
+
+  <div>
+    <%= link_to "Show this friend", @friend , class:"btn btn-outline-secondary" %> 
+    <%= link_to "Back to friends", friends_path , class:"btn btn-outline-secondary"%>
+  </div>
+  <% else %>
+     <p class="lead text-center">Not Authorized to do this action</p>
+
+<%end%>
+
